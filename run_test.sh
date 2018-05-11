@@ -35,6 +35,6 @@ docker stop $ipfs_container
 echo "removing ipfs_host container"
 docker rm $ipfs_container 
 
-exit 1
+exit 0
 
 

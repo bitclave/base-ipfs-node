@@ -11,5 +11,5 @@ before_script:
   - echo before script placegholder
 
 script:
-  - ./run_test.sh
+  - sudo ./run_test.sh
 
