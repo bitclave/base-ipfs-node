@@ -3,8 +3,10 @@ export ipfs_data=/tmp/ipfs-docker-data
 export ipfs_staging=/tmp/ipfs-docker-staging
 ipfs_container=`docker ps | grep ipfs_host | awk ' {print $1} '`
 echo ipfs_container = $ipfs_container
-if [[ !  -z  $ipfs_container  ]]
+if [   -z  $ipfs_container  ]
 then
+    echo "no active ipfs_host was found"
+else
     echo "stoppping ipfs_host container"
     docker stop $ipfs_container 
     echo "removing ipfs_host container"
