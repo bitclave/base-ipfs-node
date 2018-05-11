@@ -1,0 +1,15 @@
+sudo: required
+dist: trusty
+
+services:
+  - docker
+
+install:
+  - echo install placeholder 
+
+before_script:
+  - echo before script placegholder
+
+script:
+  - ./run_test.sh
+
