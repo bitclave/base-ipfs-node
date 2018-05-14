@@ -12,4 +12,5 @@ before_script:
 
 script:
   - sudo ./run_test.sh
+  - sudo ./run_test2.sh
 
