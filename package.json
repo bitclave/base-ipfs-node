@@ -1,0 +1,29 @@
+{
+  "name": "base-ipfs-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test0": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --timeout 100000 --recursive  \"./test/*Test.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitclave/base-ipfs-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bitclave/base-ipfs-node/issues"
+  },
+  "homepage": "https://github.com/bitclave/base-ipfs-node#readme",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "ipfs": "^0.28.2",
+    "mocha": "^5.1.1"
+  }
+}
