@@ -6,13 +6,15 @@ services:
 
 install:
   - echo install placeholder 
+  - npm install
 
 before_script:
   - echo before script placegholder
+
 
 script:
   - sudo ./run_test.sh
   - sudo ./run_test2.sh
   - npm test
-  
+
 
