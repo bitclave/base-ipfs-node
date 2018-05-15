@@ -16,7 +16,7 @@ echo file added, file_hash = $file_hash
 
 sleep 3
 echo file content using "ipfs cat"
-content1=`docker-compose exec ipfs1 ipfs cat /ipfs/$file_hash`
+content1=`docker-compose exec ipfs1 ipfs cat /ipfs/$file_hash | sed 's/[^a-zA-Z0-9 ]//g'`
 echo content1=$content1
 if [ "$content1" != "$content" ]; then
   docker-compose down
