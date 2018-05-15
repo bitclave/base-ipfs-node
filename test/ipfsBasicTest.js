@@ -13,59 +13,61 @@ describe('basic IPFS test', async () => {
       }
 
     it('add file to IPFS',  async () => {
+        console.log('starting IPFS node...');
+
         const IPFS = require('ipfs');
         const ipfs =  new IPFS();
 
-        let ready = false;
-        while (!ready)
-        {
-            ipfs.on('ready', () => {
-                ready=true;
-            });
-            console.log('IPFS node starting up...');
-            await sleep(100);
-        }
+        const promise = new Promise (resolve => ipfs.on('ready', () => {resolve()} ));
+        await promise;
+
+        // let ready = false;
+        // while (!ready)
+        // {
+        //     ipfs.on('ready', () => {
+        //         ready=true;
+        //     });
+        //     console.log('IPFS node starting up...');
+        //     await sleep(100);
+        // }
        
         console.log('IPFS node is ready');
         
         const version = await ipfs.version()
-        console.log('ipfs version: ', version);
+        // console.log('ipfs version: ', version);
+
+        const file1Content='file1 content';
+        const buffer = Buffer.from(file1Content)
+          
+        let fileHash
+        await new Promise (resolve => ipfs.files.add(buffer,  (err, filesAdded) => {
+            // console.log(filesAdded);
+            fileHash = filesAdded[0].hash;
+            resolve();    
+        }));
         
+        let fileContentFromIpfs
+        // console.log('file#0 hash=', fileHash);
+        await new Promise (resolve => ipfs.files.cat(fileHash,  (err, data) => {
+            // console.log(data.toString());
+            fileContentFromIpfs = data.toString();
+            resolve();    
+        }));
+
+        // console.log('Node stopping...!')
         await ipfs.stop()
-        console.log('Node stopped!')
+        // console.log('Node stopped!')
+
+        fileContentFromIpfs.should.be.not.equal(file1Content+1);
+        fileContentFromIpfs.should.be.equal(file1Content);
         
-        
+        console.log('finished add file test');
     });
 
-    // it('add file to IPFS', async () => {
-    //     const IPFS = require('ipfs');
-    //     const ipfs =  new IPFS();
-
-    //     let ready = false;
-    //     while (!ready)
-    //     {
-    //         ipfs.on('ready', () => {
-    //             ready=true;
-    //         });
-    //         console.log('IPFS node starting up...');
-    //         await sleep(100);
-    //     }
-       
-    //     console.log('IPFS node is ready');
-            
-    //     ipfs.version()
-    //     .then((version) => {
-    //         console.log('ipfs version: ', version);
-            
-    //         ipfs.stop()
-    //         .then(() => console.log('Node stopped!'))
-    //         .catch(error => console.error('Node failed to stop cleanly!', error))
-    //     })
-    //     .catch((error)=>console.error('failed to get version', error))   
-    // });
+    
 
     it('last test',  () => {
-        console.log('finish');
+        console.log('Last printout');
     });
 
     
